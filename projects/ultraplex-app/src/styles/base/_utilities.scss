@@ -1,0 +1,51 @@
+@import 'abstracts';
+
+.u-flex {
+  display: flex;
+}
+
+.u-flexRow {
+  @extend .u-flex;
+  flex-direction: row;
+}
+
+.u-flexRowReverse {
+  @extend .u-flex;
+  flex-direction: row-reverse;
+}
+
+.u-flexColumn {
+  @extend .u-flex;
+  flex-direction: column;
+}
+
+.u-flexColumnReverse {
+  @extend .u-flex;
+  flex-direction: column-reverse;
+}
+
+.u-flexWrap {
+  flex-flow: wrap;
+}
+
+.u-flexXCenter {
+  justify-content: center;
+}
+
+.u-flexYCenter {
+  align-items: center;
+}
+
+.u-flexCenter {
+  @extend .u-flexXCenter;
+  @extend .u-flexYCenter;
+}
+
+.u-fullWidth {
+  width: 100%;
+}
+
+.u-columnFull {
+  @extend .u-flexColumn;
+  @extend .u-fullWidth;
+}

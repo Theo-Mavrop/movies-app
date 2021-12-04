@@ -3,6 +3,14 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@ultraplex-app/api": [
+        "projects/@api/src/public-api"
+      ],
+      "@ultraplex-app/core": [
+        "projects/@core/src/public-api"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

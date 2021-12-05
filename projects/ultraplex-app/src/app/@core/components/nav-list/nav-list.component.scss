@@ -1,0 +1,13 @@
+@import 'abstracts';
+
+.nav-list {
+
+  &__icon {
+    color: $primary-color;
+  }
+
+  &__caption {
+    color: $secondary-color;
+    padding-left: 0.6rem;
+  }
+}

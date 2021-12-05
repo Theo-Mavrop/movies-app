@@ -1,5 +1,19 @@
-<main class="main u-flex">
-  <!-- <app-layout>
-    <router-outlet></router-outlet>
-  </app-layout> -->
-</main>
+<app-layout>
+  <mat-sidenav-container class="nav__container">
+    <mat-sidenav #sidenav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      (openedStart)="menuToggle(true)"
+      (closedStart)="menuToggle(false)"
+      class="nav__sideNav" role="navigation"
+    >
+      <app-nav-list (sidenavClose)="sidenav.close()"></app-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="nav__content">
+      <app-header (sideNavToggled)="sidenav.toggle()"></app-header>
+      <main class="main u-flex">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</app-layout>

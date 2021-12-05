@@ -1,0 +1,13 @@
+.nav {
+  &__container, &__content, &__sideNav {
+    height: 100%;
+  }
+
+  &__sideNav {
+    width: 25rem;
+  }
+}
+
+.main {
+  padding: 1rem;
+}

@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$primary-pallete: mat.define-palette(mat.$indigo-palette);
+
+$primary-color: mat.get-color-from-palette($primary-pallete, 'default');
+$secondary-color: mat.get-color-from-palette($primary-pallete, 'darker');

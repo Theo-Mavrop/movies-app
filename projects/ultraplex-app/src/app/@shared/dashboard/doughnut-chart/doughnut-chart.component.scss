@@ -1,0 +1,15 @@
+.doughnut-chart {
+  height: 100%;
+  position: relative;
+
+  &__canvas {
+    max-height: 100%;
+    width: auto;
+  }
+
+  &__legend {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+  }
+}

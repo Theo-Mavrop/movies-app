@@ -7,11 +7,12 @@
       (closedStart)="menuToggle(false)"
       class="nav__sideNav" role="navigation"
     >
+      <mat-toolbar>Menu</mat-toolbar>
       <app-nav-list (sidenavClose)="sidenav.close()"></app-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="nav__content">
       <app-header (sideNavToggled)="sidenav.toggle()"></app-header>
-      <main class="main u-flex">
+      <main class="main u-columnFull">
         <router-outlet></router-outlet>
       </main>
     </mat-sidenav-content>

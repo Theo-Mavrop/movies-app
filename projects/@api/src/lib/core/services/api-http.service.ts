@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ApiHttpService {
@@ -8,7 +9,10 @@ export class ApiHttpService {
     private http: HttpClient
   ) { }
 
-  get<T>(url: string, options?: any) {
+  get<T>(url: string, options?: {
+    headers?: HttpHeaders,
+    params?: HttpParams
+  }): Observable<T> {
     return this.http.get<T>(url, options);
   }
 
@@ -28,3 +32,4 @@ export class ApiHttpService {
     return this.http.delete<T>(url, options);
   }
 }
+

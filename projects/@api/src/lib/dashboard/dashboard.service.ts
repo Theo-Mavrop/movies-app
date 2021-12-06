@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiHelpersService } from '../core/services/api-helpers.service';
 import { ApiHttpService } from '../core/services/api-http.service';
 import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DashboardApiService {

@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const materuialModules: any[] = [
   MatSidenavModule,
@@ -15,7 +17,9 @@ const materuialModules: any[] = [
   MatButtonModule,
   MatListModule,
   MatCardModule,
-  LayoutModule
+  LayoutModule,
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

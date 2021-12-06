@@ -4,6 +4,7 @@ import { GlobalErrorHandler } from './core/interceptors/global-error-handler';
 import { ApiHelpersService } from './core/services/api-helpers.service';
 import { ApiHttpService } from './core/services/api-http.service';
 import { DashboardApiModule } from './dashboard/dashboard-api.module';
+import { CinemasApiModule } from './cinemas/cinemas-api.module';
 
 @NgModule({
   providers: [
@@ -11,7 +12,8 @@ import { DashboardApiModule } from './dashboard/dashboard-api.module';
   ],
   imports: [
     HttpClientModule,
-    DashboardApiModule
+    DashboardApiModule,
+    CinemasApiModule
   ]
 })
 export class ApiModule {

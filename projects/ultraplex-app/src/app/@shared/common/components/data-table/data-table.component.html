@@ -1,0 +1,15 @@
+<div class="data-table">
+  <div class="data-table__container">
+    <mat-table class="data-table__table" [dataSource]="data">
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef>{{column.header}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{column.cell(element)}}</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>
+<mat-paginator [length]="total" [pageSize]="pageSize" [pageSizeOptions]="[10]" [pageIndex]="pageIndex" (page)="onPageChanged($event)">
+
+</mat-paginator>

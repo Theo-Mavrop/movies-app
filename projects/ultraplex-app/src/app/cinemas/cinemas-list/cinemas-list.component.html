@@ -8,6 +8,9 @@
       [total]="(totalCinemas$ | async)"
       [pageSize]="pageSize"
       [pageIndex]="pageIndex"
+      [childDataField]="childDataField"
+      [childColumns]="childColumns"
+      [displayChildColumns]="displayChildColumns"
       (pageChanged)="onPageChange($event)"
     ></cm-data-table>
   </div>

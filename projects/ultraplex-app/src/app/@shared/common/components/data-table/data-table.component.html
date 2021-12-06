@@ -1,12 +1,38 @@
 <div class="data-table">
   <div class="data-table__container">
-    <mat-table class="data-table__table" [dataSource]="data">
+    <mat-table class="data-table__table" [dataSource]="data" multiTemplateDataRows>
       <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
         <mat-header-cell *matHeaderCellDef>{{column.header}}</mat-header-cell>
         <mat-cell *matCellDef="let element">{{column.cell(element)}}</mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let element" [attr.colspan]="displayColumns.length">
+          <div class="example-element-detail"
+            [@detailExpand]="element != expandedElement ? 'expanded' : 'collapsed'">
+            <h2 class="data-table__title mat-h2">Screens</h2>
+            <mat-table
+              [dataSource]="element[childDataField]"
+              class="lmat-elevation-z8 data-table__innertable"
+            >
+              <ng-container *ngFor="let column of childColumns" [matColumnDef]="column.columnDef">
+                <mat-header-cell *matHeaderCellDef>{{column.header}}</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{column.cell(element)}}</mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayChildColumns"></mat-header-row>
+							<mat-row *matRowDef="let row; columns: displayChildColumns"></mat-row>
+            </mat-table>
+          </div>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayColumns" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === row"></mat-row>
+      <mat-row
+        [class.expandable-row-detail-expanded]="expandedElement !== row && (row[childDataField] && row[childDataField].length > 0)"
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="expandable-row-detail"></mat-row>
     </mat-table>
   </div>
 </div>

@@ -10,38 +10,11 @@
     overflow: auto;
   }
 
-  &__table, &__innertable {
+  &__table {
     width: 100%;
   }
 
   &__title {
     margin: 0;
   }
-
-  &__innertable {
-    background-color: $grey-light;
-  }
-}
-
-mat-row.expandable-row-detail {
-	height: 0;
-	min-height: 0;
-	opacity: 0;
-	padding-right: 0;
-  background-color: $grey-light;
-}
-
-mat-row.expandable-row-detail-expanded {
-	min-height: auto !important;
-	height: auto;
-	opacity: 1;
-}
-
-.example-element-detail {
-	overflow: hidden;
-	display: flex;
-  flex-direction: column;
-  justify-content: center;
-	width: 100%;
-  background-color: $grey-light;
 }

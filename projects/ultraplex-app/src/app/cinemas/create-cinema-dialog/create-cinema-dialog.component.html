@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <ng-container *ngFor="let item of data.form">
+    <mat-form-field [formGroup]="item.control" appearance="fill">
+      <mat-label>{{item.label}}</mat-label>
+      <input
+        matInput
+        [formControlName]="item.controlName"
+      >
+      <mat-error *ngIf="item.control.controls[item.controlName].hasError('required')">{{item.label}} is required</mat-error>
+    </mat-form-field>
+  </ng-container>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseClick()">Close</button>
+  <button mat-button [mat-dialog-close]="data.form" cdkFocusInitial>Save</button>
+</div>

@@ -25,9 +25,6 @@ export class DataTableComponent implements OnInit {
   @Input() total: number = 0;
   @Input() pageSize: number = 0;
   @Input() pageIndex: number = 0;
-  @Input() childDataField: string;
-  @Input() childColumns: DataTableColumn[] = [];
-  @Input() displayChildColumns: string[] = [];
 
   expandedElement: null;
 
@@ -44,10 +41,4 @@ export class DataTableComponent implements OnInit {
       page: event.pageIndex
     });
   }
-
-  expandRow(row) {
-		if (row[this.childDataField] !== null && row[this.childDataField] !== undefined && row[this.childDataField].length > 0) {
-			this.expandedElement = this.expandedElement === row ? null : row;
-		}
-	}
 }

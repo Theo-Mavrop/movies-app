@@ -10,4 +10,11 @@
     color: $secondary-color;
     padding-left: 0.6rem;
   }
+
+  &__item {
+    &--active {
+      font-weight: 500;
+      background: rgba(0,0,0,.04);
+    }
+  }
 }

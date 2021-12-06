@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './@shared/material/material.module';
+import { ApplicationModule } from '@ultraplex-app/core';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,10 @@ import { MaterialModule } from './@shared/material/material.module';
     BrowserAnimationsModule,
     CoreModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ApplicationModule.forRoot({
+      baseUrl: environment.baseUrl
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

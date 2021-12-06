@@ -11,6 +11,7 @@ export class DoughnutChartComponent implements OnInit {
 
   @Input() data: SingleDataSet | MultiDataSet = [];
   @Input() colors: Color[] = [ {backgroundColor: '#303f9f'}];
+  @Input() labels: Label[] = [];
 
   constructor() { }
 

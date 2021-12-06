@@ -3,22 +3,39 @@
   <div class="dashboard__grid">
     <div class="dashboard__gridTile">
       <dash-card [title]="'Cinemas'">
-        <dashboard-doughnut-chart [data]="[350]" [colors]="[{backgroundColor: '#F57C00'}]"></dashboard-doughnut-chart>
+        <dashboard-doughnut-chart
+          [data]="[(totalCinemas$ | async)]"
+          [colors]="[{backgroundColor: '#F57C00'}]"
+          [labels]="['# of cinemas']"
+        >
+        </dashboard-doughnut-chart>
       </dash-card>
     </div>
     <div class="dashboard__gridTile">
       <dash-card [title]="'Screens'">
-        <dashboard-doughnut-chart [data]="[450]" [colors]="[{backgroundColor: '#3d5afe'}]"></dashboard-doughnut-chart>
+        <dashboard-doughnut-chart
+          [data]="[(totalScreens$ | async)]"
+          [colors]="[{backgroundColor: '#3d5afe'}]"
+          [labels]="['# of screens']"
+        ></dashboard-doughnut-chart>
       </dash-card>
     </div>
     <div class="dashboard__gridTile">
       <dash-card [title]="'Movies'">
-        <dashboard-doughnut-chart [data]="[45]" [colors]="[{backgroundColor: '#aa00ff'}]"></dashboard-doughnut-chart>
+        <dashboard-doughnut-chart
+          [data]="[(totalMovies$ | async)]"
+          [colors]="[{backgroundColor: '#aa00ff'}]"
+          [labels]="['# of movies']"
+        ></dashboard-doughnut-chart>
       </dash-card>
     </div>
     <div class="dashboard__gridTile">
       <dash-card [title]="'Bookings'">
-        <dashboard-doughnut-chart [data]="[750]" [colors]="[{backgroundColor: '#f44336'}]"></dashboard-doughnut-chart>
+        <dashboard-doughnut-chart
+          [data]="[(totalBookings$ | async)]"
+          [colors]="[{backgroundColor: '#f44336'}]"
+          [labels]="['# of bookings']"
+        ></dashboard-doughnut-chart>
       </dash-card>
     </div>
   </div>

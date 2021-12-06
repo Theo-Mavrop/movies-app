@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard.component';
 import { MaterialModule } from '../@shared/material/material.module';
 import { CardComponent } from './card/card.component';
 import { SharedDashboardModule } from '../@shared/dashboard/shared-dashboard.module';
+import { DashboardCoreModule } from '@ultraplex-app/core';
+import { DashboardFacadeService } from './dashboard.facade.service';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,13 @@ import { SharedDashboardModule } from '../@shared/dashboard/shared-dashboard.mod
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    DashboardCoreModule,
     MaterialModule,
     SharedDashboardModule
   ],
-  providers: [],
+  providers: [
+    DashboardFacadeService
+  ],
   exports: [
     DashboardComponent
   ]

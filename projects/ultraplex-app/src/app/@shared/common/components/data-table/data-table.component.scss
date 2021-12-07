@@ -17,4 +17,10 @@
   &__title {
     margin: 0;
   }
+
+  .mat-column-actions {
+    width: 10rem;
+    flex: none;
+    justify-content: center;
+  }
 }

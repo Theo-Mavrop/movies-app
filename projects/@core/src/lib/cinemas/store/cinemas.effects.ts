@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { BaseResponse, CinemaDTO, CinemasApiService } from '@ultraplex-app/api';
-import { map, switchMap } from 'rxjs/operators';
-import { CinemasLoaded, ECinemasActions, LoadCinemas } from './cinemas.actions';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { CinemasLoaded, CreateCinema, ECinemasActions, LoadCinemas, CreateCinemaSuccess, CreateCinemaFail, CinemasLoadedFailed } from './cinemas.actions';
 
 @Injectable()
 export class CinemasEffects {
@@ -12,7 +12,19 @@ export class CinemasEffects {
       switchMap((action) => this.api.getCinemas(action.payload)),
       map((result: BaseResponse<CinemaDTO>) => {
         return new CinemasLoaded(result);
-      })
+      }),
+      catchError((err) => [new CinemasLoadedFailed(err)])
+    )
+  );
+
+  createCinema = createEffect(
+    () => this.actions$.pipe(
+      ofType<CreateCinema>(ECinemasActions.CreateCinema),
+      switchMap((action) => this.api.createCinema(action.payload)),
+      map((result) => {
+        return new CreateCinemaSuccess();
+      }),
+      catchError((err) => [new CreateCinemaFail(err)])
     )
   );
 

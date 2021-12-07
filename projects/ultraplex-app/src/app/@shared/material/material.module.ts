@@ -12,6 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const materuialModules: any[] = [
   MatSidenavModule,
@@ -25,7 +26,8 @@ const materuialModules: any[] = [
   MatPaginatorModule,
   MatFormFieldModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

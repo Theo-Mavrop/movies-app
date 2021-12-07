@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
 import { CinemasFacadeService } from '../cinemas.facade.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateCinemaDialogComponent } from '../create-cinema-dialog/create-cinema-dialog.component';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
+import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
 
 @Component({
   selector: 'app-cinemas-list',
@@ -58,7 +59,7 @@ export class CinemasListComponent implements OnInit {
   }
 
   onAddCinema(): void {
-    const form = [
+    const form: FormDialogData[] = [
       {
         label: 'Name',
         controlName: 'name',
@@ -68,14 +69,16 @@ export class CinemasListComponent implements OnInit {
         )
       }
     ];
-    const dialogRef = this.dialog.open(CreateCinemaDialogComponent, {
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
       width: '25rem',
       data: { title: 'Create cinema' , form }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: FormDialogData) => {
       if (result) {
-
+        this.cinemasFacadeService.createCinema({
+          name: result[0].control.get('name').value
+        });
       }
     })
   }

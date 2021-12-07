@@ -4,8 +4,8 @@ import { ApiHelpersService } from '../core/services/api-helpers.service';
 import { ApiHttpService } from '../core/services/api-http.service';
 import { BaseResponse } from '../core/@models/base-response.model';
 import { CinemaDTO } from './@models/cinema.model';
-import { BaseRequest } from '../core/@models/base-request.model';
-import { HttpParams } from '@angular/common/http';
+import { BaseCreateRequest, BaseRequest } from '../core/@models/base-request.model';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class CinemasApiService {
@@ -20,5 +20,13 @@ export class CinemasApiService {
     const params = new HttpParams().set('page', payload.page).append('size', payload.size)
 
     return this.apiHttp.get<BaseResponse<CinemaDTO>>(url, {params});
+  }
+
+  createCinema(payload: BaseCreateRequest): Observable<any> {
+    const url = this.apiHelpers.createUrl('cinemas');
+    const httpHeaders = new HttpHeaders();
+		httpHeaders.set('Content-Type', 'application/json');
+
+    return this.apiHttp.put<any>(url, payload, {headers: httpHeaders});
   }
 }

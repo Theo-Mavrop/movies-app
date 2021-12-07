@@ -1,7 +1,7 @@
 import { CinemaDTO } from "@ultraplex-app/api";
-import { IBasePagedState } from "../../app-store/app.state";
+import { IBasePagedState, IBaseResultState } from "../../app-store/app.state";
 
-export interface ICinemasState extends IBasePagedState{
+export interface ICinemasState extends IBasePagedState, IBaseResultState{
   cinemas: CinemaDTO[]
 }
 
@@ -11,7 +11,10 @@ export const initialCinemasState: ICinemasState = {
   totalPages: null,
   size: null,
   number: null,
-  numberOfElements: null
+  numberOfElements: null,
+  action: null,
+  done: false,
+  error: null
 };
 
 export const cinemasFeatureKey = 'cinemas';

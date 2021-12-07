@@ -6,14 +6,12 @@ import { DataTableModule } from '../@shared/common/components/data-table/data-ta
 import { CinemasCoreModule } from '@ultraplex-app/core';
 import { CinemasFacadeService } from './cinemas.facade.service';
 import { MaterialModule } from '../@shared/material/material.module';
-import { CreateCinemaDialogComponent } from './create-cinema-dialog/create-cinema-dialog.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CreateDialogModule } from '../@shared/common/components/create-dialog/create-dialog.module';
+import { SnackBarService } from '../@shared/common/services/snackbar.service';
 
 @NgModule({
   declarations: [
-    CinemasListComponent,
-    CreateCinemaDialogComponent
+    CinemasListComponent
   ],
   imports: [
     CommonModule,
@@ -21,11 +19,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CinemasCoreModule,
     DataTableModule,
     MaterialModule,
-    FormsModule,
-    ReactiveFormsModule
+    CreateDialogModule,
   ],
   providers: [
-    CinemasFacadeService
+    CinemasFacadeService,
+    SnackBarService
   ],
   exports: [
   ]

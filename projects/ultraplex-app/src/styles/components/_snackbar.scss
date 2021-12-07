@@ -1,0 +1,17 @@
+@import 'abstracts';
+
+snack-bar-container {
+  &.error {
+    background-color: $red;
+  }
+
+  &.success {
+    background-color: $green;
+  }
+}
+
+.error, .success {
+  .mat-simple-snackbar {
+    color: $white;
+  }
+}

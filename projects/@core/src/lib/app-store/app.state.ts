@@ -8,3 +8,9 @@ export interface IBasePagedState {
   number: number;
   numberOfElements: number;
 }
+
+export interface IBaseResultState {
+  action: string;
+  done: boolean;
+  error?: Error;
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BaseCreateRequest, BaseRequest, CinemaDTO } from '@ultraplex-app/api';
 import { CreateCinema, getCinemasError, getCreateError, ICinemasState, isCreated, LoadCinemas, selectCinemas, selectCinemasTotal } from '@ultraplex-app/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { SnackBarService } from '../@shared/common/services/snackbar.service';
 
@@ -11,6 +11,8 @@ export class CinemasFacadeService {
 
   cinemas$: Observable<CinemaDTO[]>;
   totalCinemas$: Observable<number>;
+  pageSize$: BehaviorSubject<number>;
+  page$: BehaviorSubject<number>;
 
   constructor(
     private store: Store<ICinemasState>,
@@ -18,6 +20,8 @@ export class CinemasFacadeService {
   ) {
     this.cinemas$ = this.store.pipe(select(selectCinemas));
     this.totalCinemas$ = this.store.pipe(select(selectCinemasTotal));
+    this.pageSize$ = new BehaviorSubject(10);
+    this.page$ = new BehaviorSubject(0);
 
     this.store.pipe(
       select(getCinemasError),
@@ -31,8 +35,8 @@ export class CinemasFacadeService {
       filter(val => val !== null && val)
     ).subscribe((done) => {
       this.loadCinemas({
-        page: 0,
-        size: 10
+        page: this.page$.value,
+        size: this.pageSize$.value
       });
       this.snackbarService.openSnackBar('Cinema was created successfully!!!', 'success');
     });
@@ -45,6 +49,7 @@ export class CinemasFacadeService {
   }
 
   loadCinemas(payload: BaseRequest) {
+    this.page$.next(payload.page);
     this.store.dispatch(new LoadCinemas(payload));
   }
 

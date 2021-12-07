@@ -6,6 +6,7 @@ import { BaseResponse } from '../core/@models/base-response.model';
 import { CinemaDTO } from './@models/cinema.model';
 import { BaseCreateRequest, BaseRequest } from '../core/@models/base-request.model';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { CreateScreenRequest, ScreenRequest } from '@ultraplex-app/api';
 
 @Injectable()
 export class CinemasApiService {
@@ -17,7 +18,7 @@ export class CinemasApiService {
 
   getCinemas(payload: BaseRequest): Observable<BaseResponse<CinemaDTO>> {
     const url = this.apiHelpers.createUrl('cinemas');
-    const params = new HttpParams().set('page', payload.page).append('size', payload.size)
+    const params = new HttpParams().set('page', payload.page).append('size', payload.size);
 
     return this.apiHttp.get<BaseResponse<CinemaDTO>>(url, {params});
   }
@@ -28,5 +29,18 @@ export class CinemasApiService {
 		httpHeaders.set('Content-Type', 'application/json');
 
     return this.apiHttp.put<any>(url, payload, {headers: httpHeaders});
+  }
+
+  getCinemaScreens(payload: ScreenRequest) {
+    const url = this.apiHelpers.createUrl(`cinemas/${payload.cinemaId}/screens`);
+    const params = new HttpParams().set('page', payload.page).append('size', payload.size);
+    return this.apiHttp.get<BaseResponse<CinemaDTO>>(url, {params});
+  }
+
+  createCinemaScreen(payload: CreateScreenRequest) {
+    const url = this.apiHelpers.createUrl(`cinemas/${payload.cinemaId}/screens`);
+    const httpHeaders = new HttpHeaders();
+		httpHeaders.set('Content-Type', 'application/json');
+    return this.apiHttp.put<any>(url, { name: payload.name }, {headers: httpHeaders});
   }
 }

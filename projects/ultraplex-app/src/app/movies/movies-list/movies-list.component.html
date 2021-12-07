@@ -1,0 +1,18 @@
+<div class="movies-list">
+  <h1 class="movies-list__title mat-h1">Movies</h1>
+  <div class="movies-list__actions u-flexRow u-flexYCenter">
+    <button mat-raised-button (click)="onAddMovie()">Add Movie</button>
+  </div>
+  <div class="movies-list__table">
+    <cm-data-table
+      [columns]="movieColumns"
+      [data]="(movieData$ | async)"
+      [displayColumns]="movieDisplayColumns"
+      [total]="(totalMovies$ | async)"
+      [pageSize]="(pageSize$ | async)"
+      [pageIndex]="(pageIndex$ | async)"
+      (pageChanged)="onPageChange($event)"
+    ></cm-data-table>
+  </div>
+</div>
+

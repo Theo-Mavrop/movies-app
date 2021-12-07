@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseRequest, CinemaDTO } from '@ultraplex-app/api';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
 import { CinemasFacadeService } from '../cinemas.facade.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,8 +31,8 @@ export class CinemasListComponent implements OnInit {
   cinemaData$: Observable<CinemaDTO[]>;
   cinemaDisplayColumns: string[];
   totalCinemas$: Observable<number>;
-  pageSize: number = 10;
-  pageIndex: number = 0;
+  pageSize$: BehaviorSubject<number>;
+  pageIndex$: BehaviorSubject<number>;
 
   constructor(
     private cinemasFacadeService: CinemasFacadeService,
@@ -42,12 +42,14 @@ export class CinemasListComponent implements OnInit {
     this.cinemaData$ = this.cinemasFacadeService.cinemas$;
     this.cinemaDisplayColumns = this.cinemaColumns.map(c => c.columnDef);
     this.totalCinemas$ = this.cinemasFacadeService.totalCinemas$;
+    this.pageSize$ = this.cinemasFacadeService.pageSize$;
+    this.pageIndex$ = this.cinemasFacadeService.page$;
   }
 
   ngOnInit(): void {
     this.onPageChange({
-      size: this.pageSize,
-      page: this.pageIndex
+      size: this.pageSize$.value,
+      page: this.pageIndex$.value
     });
   }
 

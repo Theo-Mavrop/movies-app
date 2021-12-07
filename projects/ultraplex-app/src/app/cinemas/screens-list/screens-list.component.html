@@ -1,0 +1,17 @@
+<div class="screens-list">
+  <h1 class="screens-list__title mat-h1">Cinema {{cinemaName}} Screens</h1>
+  <div class="screens-list__actions u-flexRow u-flexYCenter">
+    <button mat-raised-button (click)="onAddScreen()">Add Screen</button>
+  </div>
+  <div class="cinemas-list__table">
+    <cm-data-table
+      [columns]="screensColumns"
+      [data]="(screensData$ | async)"
+      [displayColumns]="screensDisplayColumns"
+      [total]="(totalScreens$ | async)"
+      [pageSize]="(pageSize$ | async)"
+      [pageIndex]="(pageIndex$ | async)"
+      (pageChanged)="onPageChange($event)"
+    ></cm-data-table>
+  </div>
+</div>

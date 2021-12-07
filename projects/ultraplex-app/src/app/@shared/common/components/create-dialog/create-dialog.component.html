@@ -3,10 +3,21 @@
   <ng-container *ngFor="let item of data.form">
     <mat-form-field [formGroup]="item.control" appearance="fill">
       <mat-label>{{item.label}}</mat-label>
-      <input
-        matInput
-        [formControlName]="item.controlName"
-      >
+      <ng-container [ngSwitch]="item.controlType">
+        <ng-container *ngSwitchCase="'text'">
+          <input
+            matInput
+            [formControlName]="item.controlName"
+          >
+        </ng-container>
+        <ng-container *ngSwitchCase="'number'">
+          <input
+            matInput
+            [type]="'number'"
+            [formControlName]="item.controlName"
+          >
+        </ng-container>
+      </ng-container>
       <mat-error *ngIf="item.control.controls[item.controlName].hasError('required')">{{item.label}} is required</mat-error>
     </mat-form-field>
   </ng-container>

@@ -7,4 +7,8 @@
     <mat-icon class="nav-list__icon">photo_camera_back</mat-icon>
     <span class="nav-list__caption">Cinemas</span>
   </a>
+  <a class="nav-list__item u-flexRow u-flexRow u-flexYCenter" mat-list-item [routerLink]="['/movies']" routerLinkActive="nav-list__item--active" (click)="onSidenavClose()">
+    <mat-icon class="nav-list__icon">videocam</mat-icon>
+    <span class="nav-list__caption">Movies</span>
+  </a>
 </mat-nav-list>

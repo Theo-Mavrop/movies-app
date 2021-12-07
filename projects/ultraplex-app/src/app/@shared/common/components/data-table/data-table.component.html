@@ -5,6 +5,17 @@
         <mat-header-cell *matHeaderCellDef>{{column.header}}</mat-header-cell>
         <mat-cell *matCellDef="let element">{{column.cell(element)}}</mat-cell>
       </ng-container>
+      <ng-container *ngIf="actionsColumn" [matColumnDef]="actionsColumn.columnDef">
+        <mat-header-cell *matHeaderCellDef>{{actionsColumn.header}}</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button (click)="$event.stopPropagation()" [matMenuTriggerFor]="menu" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngFor="let action of actionsColumn.actions" (click)="action.action(element)" mat-menu-item>{{action.label}}</button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
       <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
     </mat-table>

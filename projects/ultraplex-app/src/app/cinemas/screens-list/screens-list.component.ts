@@ -1,12 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { BaseRequest, ScreenDTO } from '@ultraplex-app/api';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
-import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
 import { ScreensFacadeService } from './screens.facade.service';
 
 @Component({
@@ -36,11 +32,10 @@ export class ScreensListComponent implements OnInit {
   pageIndex$: BehaviorSubject<number>;
   cinemaName: string;
   cinemaId: string;
+  routeSub: Subscription;
 
   constructor(
     private screensFacadeService: ScreensFacadeService,
-    private dialog: MatDialog,
-    private fb: FormBuilder,
     private route: ActivatedRoute
   ) {
     this.screensData$ = this.screensFacadeService.screens$;
@@ -51,14 +46,20 @@ export class ScreensListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.cinemaId = this.route.snapshot.paramMap.get('cinemaId');
-    this.screensFacadeService.cinemaId = this.cinemaId;
-    this.onPageChange({
-      size: this.pageSize$.value,
-      page: this.pageIndex$.value
+    this.routeSub = this.route.params.subscribe(params => {
+      this.cinemaName = params['name'] || '';
+      this.cinemaId = params['cinemaId'];
+      this.screensFacadeService.cinemaId = this.cinemaId;
+      this.onPageChange({
+        size: this.pageSize$.value,
+        page: this.pageIndex$.value
+      });
     });
   }
 
+  ngOnDestroy(): void {
+    this.routeSub.unsubscribe();
+  }
 
   onPageChange(event: BaseRequest) {
     this.screensFacadeService.loadScreens({
@@ -69,29 +70,7 @@ export class ScreensListComponent implements OnInit {
   }
 
   onAddScreen(): void {
-    const form: FormDialogData[] = [
-      {
-        label: 'Name',
-        controlName: 'name',
-        controlType: 'text',
-        control: this.fb.group(
-          { name: ['', [Validators.required]] }
-        )
-      }
-    ];
-    const dialogRef = this.dialog.open(CreateDialogComponent, {
-      width: '25rem',
-      data: { title: 'Create cinema' , form }
-    });
-
-    dialogRef.afterClosed().subscribe((result: FormDialogData) => {
-      if (result) {
-        this.screensFacadeService.createScreen({
-          cinemaId: this.cinemaId,
-          name: result[0].control.get('name').value
-        });
-      }
-    })
+    this.screensFacadeService.addScreenDialog()
   }
 
 }

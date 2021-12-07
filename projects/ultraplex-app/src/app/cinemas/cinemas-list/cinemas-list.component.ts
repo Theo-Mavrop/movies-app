@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
+import { Router } from '@angular/router';
+import { ScreensFacadeService } from '../screens-list/screens.facade.service';
 
 @Component({
   selector: 'app-cinemas-list',
@@ -26,6 +28,14 @@ export class CinemasListComponent implements OnInit {
       columnDef: 'name',
       header: 'Name',
       cell: (element) => `${element.name || ''}`
+    },
+    {
+      columnDef: 'actions',
+      header: 'Actions',
+      actions: [
+        { label: 'View Screens', action: (element: CinemaDTO) => this.viewCinemaScreens(element)},
+        { label: 'Add Screen', action: (element: CinemaDTO) => this.addCinemaScreen(element)}
+      ]
     }
   ];
   cinemaData$: Observable<CinemaDTO[]>;
@@ -36,8 +46,10 @@ export class CinemasListComponent implements OnInit {
 
   constructor(
     private cinemasFacadeService: CinemasFacadeService,
+    private screensFacadeService: ScreensFacadeService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.cinemaData$ = this.cinemasFacadeService.cinemas$;
     this.cinemaDisplayColumns = this.cinemaColumns.map(c => c.columnDef);
@@ -83,6 +95,14 @@ export class CinemasListComponent implements OnInit {
         });
       }
     })
+  }
+
+  viewCinemaScreens(element: CinemaDTO) {
+    this.router.navigate([`cinemas/${element.id}/screens`, { name: element.name }])
+  }
+
+  addCinemaScreen(element: CinemaDTO) {
+    this.screensFacadeService.addScreenDialog(element.id);
   }
 
 }

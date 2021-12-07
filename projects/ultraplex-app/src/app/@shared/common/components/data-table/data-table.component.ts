@@ -25,6 +25,7 @@ export class DataTableComponent implements OnInit {
   @Input() total: number = 0;
   @Input() pageSize: number = 0;
   @Input() pageIndex: number = 0;
+  actionsColumn: DataTableColumn;
 
   expandedElement: null;
 
@@ -33,6 +34,10 @@ export class DataTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const actionsColumnIndex = this.columns.findIndex(c => c.columnDef == 'actions');
+    if (actionsColumnIndex !== -1) {
+      this.actionsColumn = this.columns.splice(actionsColumnIndex,1)[0];
+    }
   }
 
   onPageChanged(event: PageEvent) {

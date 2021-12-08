@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseRequest, ScreeningDTO } from '@ultraplex-app/api';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
+import { ScreensFacadeService } from '../screens-list/screens.facade.service';
 import { ScreeningsFacadeService } from './screenings.facade.service';
 
 @Component({
@@ -38,6 +39,13 @@ export class ScreeningsListComponent implements OnInit {
       columnDef: 'movie',
       header: 'Movie',
       cell: (element) => `${element.movie.name || ''}`
+    },
+    {
+      columnDef: 'actions',
+      header: 'Actions',
+      actions: [
+        { label: 'Add Booking', action: (element: ScreeningDTO) => this.addBooking(element)}
+      ]
     }
   ];
   screeningsData$: Observable<ScreeningDTO[]>;
@@ -84,8 +92,8 @@ export class ScreeningsListComponent implements OnInit {
     });
   }
 
-  addScreening(): void {
-
+  addBooking(element: ScreeningDTO): void {
+    this.screeningsFacadeService.addScreeningDialog(element.id);
   }
 
 }

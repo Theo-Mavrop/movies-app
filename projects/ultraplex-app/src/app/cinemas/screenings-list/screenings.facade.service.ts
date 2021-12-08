@@ -7,6 +7,7 @@ import { CreateScreening, getScreeningCreateError, getScreeningsError, IScreenin
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
+import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
 import { SnackBarService } from '../../@shared/common/services/snackbar.service';
 
 @Injectable()
@@ -77,50 +78,29 @@ export class ScreeningsFacadeService {
     this.store.dispatch(new CreateScreening(payload))
   }
 
-  // addScreeningDialog(cinemaId: number, screenId: number): void {
-  //   this.loadAllMovies();
+  addScreeningDialog(screenId: number): void {;
 
-  //   const form: FormDialogData[] = [
-  //     {
-  //       label: 'Movie',
-  //       controlName: 'movieId',
-  //       controlType: 'select',
-  //       options$: this.store.pipe(
-  //         select(selectAllMovies),
-  //         map((movies) => {
-  //           return movies?.map((opt) => {
-  //             return {id: opt.id, text: opt.name};
-  //         })
-  //       } )),
-  //       control: this.fb.group(
-  //         { movieId: ['', [Validators.required]] }
-  //       )
-  //     },
-  //     {
-  //       label: 'Start time',
-  //       controlName: 'startTime',
-  //       controlType: 'dateTime',
-  //       control: this.fb.group(
-  //         { startTime: ['', [Validators.required]] }
-  //       )
-  //     }
-  //   ];
-  //   const dialogRef = this.dialog.open(CreateDialogComponent, {
-  //     width: '25rem',
-  //     data: { title: 'Create screening' , form }
-  //   });
+    const form: FormDialogData[] = [
+      {
+        label: 'Seat',
+        controlName: 'seat',
+        controlType: 'number',
+        control: this.fb.group(
+          { seat: ['', [Validators.required, Validators.min(0)]] }
+        )
+      }
+    ];
+    const dialogRef = this.dialog.open(CreateDialogComponent, {
+      width: '25rem',
+      data: { title: 'Create booking' , form }
+    });
 
-  //   dialogRef.afterClosed().subscribe((result: FormDialogData) => {
-  //     if (result) {
-  //       this.createScreening({
-  //         cinemaId: this.cinemaId,
-  //         screenId: screenId,
-  //         movieId: result[0].control.get('movieId').value,
-  //         startTime: result[1].control.get('startTime').value
-  //       });
-  //     }
-  //   })
-  // }
+    dialogRef.afterClosed().subscribe((result: FormDialogData) => {
+      if (result) {
+
+      }
+    })
+  }
 
 }
 

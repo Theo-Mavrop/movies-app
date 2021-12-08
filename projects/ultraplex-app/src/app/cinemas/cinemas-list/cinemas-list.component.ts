@@ -34,7 +34,8 @@ export class CinemasListComponent implements OnInit {
       header: 'Actions',
       actions: [
         { label: 'View Screens', action: (element: CinemaDTO) => this.viewCinemaScreens(element)},
-        { label: 'Add Screen', action: (element: CinemaDTO) => this.addCinemaScreen(element)}
+        { label: 'Add Screen', action: (element: CinemaDTO) => this.addCinemaScreen(element)},
+        { label: 'View Screenings', action: (element: CinemaDTO) => this.viewCinemaScreenings(element)},
       ]
     }
   ];
@@ -103,6 +104,10 @@ export class CinemasListComponent implements OnInit {
 
   addCinemaScreen(element: CinemaDTO): void {
     this.screensFacadeService.addScreenDialog(element.id);
+  }
+
+  viewCinemaScreenings(element: CinemaDTO): void {
+    this.router.navigate([`cinemas/${element.id}/screenings`, { name: element.name }])
   }
 
 }

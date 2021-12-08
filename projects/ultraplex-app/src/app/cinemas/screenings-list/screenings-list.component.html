@@ -1,0 +1,17 @@
+<div class="screenings-list">
+  <h1 class="screenings-list__title mat-h1">{{cinemaName}} Cinema Screenings</h1>
+  <div class="screenings-list__actions u-flexRow u-flexYCenter">
+    <!-- <button mat-raised-button (click)="onAddScreening()">Add Screen</button> -->
+  </div>
+  <div class="screenings-list__table">
+    <cm-data-table
+      [columns]="screeningsColumns"
+      [data]="(screeningsData$ | async)"
+      [displayColumns]="screeningsDisplayColumns"
+      [total]="(totalScreenings$ | async)"
+      [pageSize]="(pageSize$ | async)"
+      [pageIndex]="(pageIndex$ | async)"
+      (pageChanged)="onPageChange($event)"
+    ></cm-data-table>
+  </div>
+</div>

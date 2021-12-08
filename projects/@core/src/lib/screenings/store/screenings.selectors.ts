@@ -7,7 +7,7 @@ export const selectScreeningsState = createFeatureSelector<IScreeningsState>(
   screeningsFeatureKey
 );
 
-export const selectscreenings = createSelector(
+export const selectScreenings = createSelector(
   selectScreeningsState,
   (_state: IScreeningsState) => _state.screenings
 );

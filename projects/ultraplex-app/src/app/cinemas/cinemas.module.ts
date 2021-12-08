@@ -10,11 +10,14 @@ import { CreateDialogModule } from '../@shared/common/components/create-dialog/c
 import { SnackBarService } from '../@shared/common/services/snackbar.service';
 import { ScreensListComponent } from './screens-list/screens-list.component';
 import { ScreensFacadeService } from './screens-list/screens.facade.service';
+import { ScreeningsListComponent } from './screenings-list/screenings-list.component';
+import { ScreeningsFacadeService } from './screenings-list/screenings.facade.service';
 
 @NgModule({
   declarations: [
     CinemasListComponent,
-    ScreensListComponent
+    ScreensListComponent,
+    ScreeningsListComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import { ScreensFacadeService } from './screens-list/screens.facade.service';
   providers: [
     CinemasFacadeService,
     ScreensFacadeService,
+    ScreeningsFacadeService,
     SnackBarService
   ],
   exports: [

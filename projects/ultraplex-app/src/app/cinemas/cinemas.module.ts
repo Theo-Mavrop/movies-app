@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CinemasListComponent } from './cinemas-list/cinemas-list.component';
 import { CinemasRoutingModule } from './cinemas-routing.module';
 import { DataTableModule } from '../@shared/common/components/data-table/data-table.module';
-import { CinemasCoreModule, ScreensCoreModule } from '@ultraplex-app/core';
+import { CinemasCoreModule, ScreeninsCoreModule, ScreensCoreModule } from '@ultraplex-app/core';
 import { CinemasFacadeService } from './cinemas.facade.service';
 import { MaterialModule } from '../@shared/material/material.module';
 import { CreateDialogModule } from '../@shared/common/components/create-dialog/create-dialog.module';
@@ -21,6 +21,7 @@ import { ScreensFacadeService } from './screens-list/screens.facade.service';
     CinemasRoutingModule,
     CinemasCoreModule,
     ScreensCoreModule,
+    ScreeninsCoreModule,
     DataTableModule,
     MaterialModule,
     CreateDialogModule,

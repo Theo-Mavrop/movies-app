@@ -57,6 +57,27 @@ export const screensReducers = (
         error: action.payload
       }
     }
+    case EScreensActions.GetAllMoviesList: {
+      return {
+        ...state,
+        action: EScreensActions.LoadScreens,
+        done: false,
+        error: null
+      };
+    }
+    case EScreensActions.GetAllMoviesListSuccess: {
+      return {
+        ...state,
+        moviesList: action.payload.content
+      };
+    }
+    case EScreensActions.GetAllMoviesListFailed: {
+      return {
+        ...state,
+        done: true,
+        error: action.payload
+      };
+    }
     default:
       return state;
   }

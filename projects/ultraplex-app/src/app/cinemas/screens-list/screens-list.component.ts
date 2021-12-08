@@ -23,6 +23,13 @@ export class ScreensListComponent implements OnInit {
       columnDef: 'name',
       header: 'Name',
       cell: (element) => `${element.name || ''}`
+    },
+    {
+      columnDef: 'actions',
+      header: 'Actions',
+      actions: [
+        { label: 'Add Screening', action: (element: ScreenDTO) => this.addScreening(element)}
+      ]
     }
   ];
   screensData$: Observable<ScreenDTO[]>;
@@ -31,7 +38,7 @@ export class ScreensListComponent implements OnInit {
   pageSize$: BehaviorSubject<number>;
   pageIndex$: BehaviorSubject<number>;
   cinemaName: string;
-  cinemaId: string;
+  cinemaId: number;
   routeSub: Subscription;
 
   constructor(
@@ -61,7 +68,7 @@ export class ScreensListComponent implements OnInit {
     this.routeSub.unsubscribe();
   }
 
-  onPageChange(event: BaseRequest) {
+  onPageChange(event: BaseRequest): void {
     this.screensFacadeService.loadScreens({
       cinemaId: this.cinemaId,
       size: event.size,
@@ -71,6 +78,10 @@ export class ScreensListComponent implements OnInit {
 
   onAddScreen(): void {
     this.screensFacadeService.addScreenDialog()
+  }
+
+  addScreening(element: ScreenDTO): void {
+    this.screensFacadeService.addScreeningDialog(this.cinemaId, element.id);
   }
 
 }

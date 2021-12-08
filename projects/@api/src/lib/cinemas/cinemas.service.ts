@@ -6,7 +6,7 @@ import { BaseResponse } from '../core/@models/base-response.model';
 import { CinemaDTO } from './@models/cinema.model';
 import { BaseCreateRequest, BaseRequest } from '../core/@models/base-request.model';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { CreateScreenRequest, ScreenRequest } from '@ultraplex-app/api';
+import { CreateScreeningRequest, CreateScreenRequest, ScreenRequest } from '@ultraplex-app/api';
 
 @Injectable()
 export class CinemasApiService {
@@ -42,5 +42,12 @@ export class CinemasApiService {
     const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Content-Type', 'application/json');
     return this.apiHttp.put<any>(url, { name: payload.name }, {headers: httpHeaders});
+  }
+
+  createScreening(payload: CreateScreeningRequest) {
+    const url = this.apiHelpers.createUrl(`cinemas/${payload.cinemaId}/screens/${payload.screenId}/screenings`);
+    const httpHeaders = new HttpHeaders();
+		httpHeaders.set('Content-Type', 'application/json');
+    return this.apiHttp.put<any>(url, { movieId: payload.movieId, startTime: payload.startTime }, {headers: httpHeaders});
   }
 }

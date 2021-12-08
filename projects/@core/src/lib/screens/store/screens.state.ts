@@ -1,8 +1,9 @@
-import { ScreenDTO } from "@ultraplex-app/api";
+import { MovieDTO, ScreenDTO } from "@ultraplex-app/api";
 import { IBasePagedState, IBaseResultState } from "../../app-store/app.state";
 
 export interface IScreensState extends IBasePagedState, IBaseResultState{
-  screens: ScreenDTO[]
+  screens: ScreenDTO[],
+  moviesList: MovieDTO[]
 }
 
 export const initialScreensState: IScreensState = {
@@ -14,7 +15,8 @@ export const initialScreensState: IScreensState = {
   numberOfElements: null,
   action: null,
   done: false,
-  error: null
+  error: null,
+  moviesList: null
 };
 
 export const screensFeatureKey = 'screens';

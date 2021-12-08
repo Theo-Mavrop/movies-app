@@ -65,7 +65,7 @@ export class CinemasListComponent implements OnInit {
     });
   }
 
-  onPageChange(event: BaseRequest) {
+  onPageChange(event: BaseRequest): void {
     this.cinemasFacadeService.loadCinemas({
       size: event.size,
       page: event.page
@@ -97,11 +97,11 @@ export class CinemasListComponent implements OnInit {
     })
   }
 
-  viewCinemaScreens(element: CinemaDTO) {
+  viewCinemaScreens(element: CinemaDTO): void {
     this.router.navigate([`cinemas/${element.id}/screens`, { name: element.name }])
   }
 
-  addCinemaScreen(element: CinemaDTO) {
+  addCinemaScreen(element: CinemaDTO): void {
     this.screensFacadeService.addScreenDialog(element.id);
   }
 

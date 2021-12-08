@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { BaseResponse, ScreenDTO, CinemasApiService } from '@ultraplex-app/api';
+import { BaseResponse, ScreenDTO, CinemasApiService, MoviesApiService, MovieDTO } from '@ultraplex-app/api';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { CreateScreen, CreateScreenFail, CreateScreenSuccess, EScreensActions, LoadScreens, ScreensLoaded, ScreensLoadedFailed } from './screens.actions';
+import { CreateScreen, CreateScreenFail, CreateScreenSuccess, EScreensActions, GetAllMoviesList, GetAllMoviesListFailed, GetAllMoviesListSuccess, LoadScreens, ScreensLoaded, ScreensLoadedFailed } from './screens.actions';
 
 @Injectable()
 export class ScreensEffects {
@@ -28,8 +28,20 @@ export class ScreensEffects {
     )
   );
 
+  getAllMoviesList = createEffect(
+    () => this.actions$.pipe(
+      ofType<GetAllMoviesList>(EScreensActions.GetAllMoviesList),
+      switchMap(() => this.moviesApi.getAllMovies()),
+      map((result: BaseResponse<MovieDTO>) => {
+        return new GetAllMoviesListSuccess(result);
+      }),
+      catchError((err) => [new GetAllMoviesListFailed(err)])
+    )
+  );
+
   constructor(
     private actions$: Actions,
-    private api: CinemasApiService
+    private api: CinemasApiService,
+    private moviesApi: MoviesApiService
   ) {}
 }

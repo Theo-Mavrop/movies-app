@@ -36,3 +36,16 @@ export const getScreensError = createSelector(
       ? state.error
       : null;
 });
+
+export const selectAllMovies = createSelector(
+  selectScreensState,
+  (_state: IScreensState) => _state.moviesList
+);
+
+export const getAllMoviesError = createSelector(
+  selectScreensState,
+  (state: IScreensState) => {
+    return state.action === EScreensActions.GetAllMoviesList
+      ? state.error
+      : null;
+});

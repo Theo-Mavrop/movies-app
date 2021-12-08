@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BaseResponse, CreateScreenRequest, ScreenDTO, ScreenRequest } from '@ultraplex-app/api';
+import { BaseResponse, CreateScreenRequest, MovieDTO, ScreenDTO, ScreenRequest } from '@ultraplex-app/api';
 
 export enum EScreensActions {
   LoadScreens = '[Screens] Load Screens',
@@ -7,7 +7,10 @@ export enum EScreensActions {
   ScreensLoadedFailed = '[Screens] Load Screens failed',
   CreateScreen = '[Screens] Create Screen',
   CreateScreenSuccess = '[Screens] Create Screen success',
-  CreateScreenFail = '[Screens] Create Screen failed'
+  CreateScreenFail = '[Screens] Create Screen failed',
+  GetAllMoviesList = '[Screens] Get all movies list',
+  GetAllMoviesListSuccess = '[Screens] Get all movies list success',
+  GetAllMoviesListFailed = '[Screens] Get all movies list fail'
 }
 
 export class LoadScreens implements Action {
@@ -45,10 +48,29 @@ export class CreateScreenFail implements Action {
   constructor(public payload: Error) {}
 }
 
+export class GetAllMoviesList implements Action {
+  readonly type = EScreensActions.GetAllMoviesList;
+}
+
+export class GetAllMoviesListSuccess implements Action {
+  readonly type = EScreensActions.GetAllMoviesListSuccess;
+
+  constructor(public payload: BaseResponse<MovieDTO>) {}
+}
+
+export class GetAllMoviesListFailed implements Action {
+  readonly type = EScreensActions.GetAllMoviesListFailed;
+
+  constructor(public payload: Error) {}
+}
+
 export type ScreensActions =
   | LoadScreens
   | ScreensLoadedFailed
   | ScreensLoaded
   | CreateScreen
   | CreateScreenSuccess
-  | CreateScreenFail;
+  | CreateScreenFail
+  | GetAllMoviesList
+  | GetAllMoviesListSuccess
+  | GetAllMoviesListFailed;

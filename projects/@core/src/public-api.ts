@@ -25,6 +25,12 @@ export * from './lib/screens/store/screens.state';
 export * from './lib/screens/store/screens.selectors';
 export * from './lib/screens/store/screens.actions';
 
+// Screenings
+export * from './lib/screenings/screenings.module';
+export * from './lib/screenings/store/screenings.state';
+export * from './lib/screenings/store/screenings.selectors';
+export * from './lib/screenings/store/screenings.actions';
+
 // Movies
 export * from './lib/movies/movies.module';
 export * from './lib/movies/store/movies.state';

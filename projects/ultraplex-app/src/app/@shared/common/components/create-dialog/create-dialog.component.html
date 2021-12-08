@@ -17,6 +17,22 @@
             [formControlName]="item.controlName"
           >
         </ng-container>
+        <ng-container *ngSwitchCase="'dateTime'">
+          <input
+            matInput
+            [type]="'datetime-local'"
+            placeholder="start date"
+            [formControlName]="item.controlName"
+            value="''"
+          >
+        </ng-container>
+        <ng-container *ngSwitchCase="'select'">
+          <mat-select [formControlName]="item.controlName">
+            <mat-option *ngFor="let option of item.options$ | async" [value]="option.id">
+              {{option.text}}
+            </mat-option>
+          </mat-select>
+        </ng-container>
       </ng-container>
       <mat-error *ngIf="item.control.controls[item.controlName].hasError('required')">{{item.label}} is required</mat-error>
     </mat-form-field>

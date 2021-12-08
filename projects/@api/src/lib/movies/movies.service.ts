@@ -22,6 +22,13 @@ export class MoviesApiService {
     return this.apiHttp.get<BaseResponse<MovieDTO>>(url, {params});
   }
 
+  getAllMovies(): Observable<BaseResponse<MovieDTO>> {
+    const url = this.apiHelpers.createUrl('movies');
+    const params = new HttpParams().set('size', 1000)
+
+    return this.apiHttp.get<BaseResponse<MovieDTO>>(url, {params});
+  }
+
   createMovie(payload: CreateMovieRequest): Observable<any> {
     const url = this.apiHelpers.createUrl('movies');
     const httpHeaders = new HttpHeaders();

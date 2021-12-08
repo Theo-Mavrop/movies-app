@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     ApplicationModule.forRoot({
       baseUrl: environment.baseUrl
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

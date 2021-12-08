@@ -13,7 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatMenuModule }from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 const materuialModules: any[] = [
   MatSidenavModule,
@@ -29,7 +30,8 @@ const materuialModules: any[] = [
   MatDialogModule,
   MatInputModule,
   MatSnackBarModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSelectModule
 ];
 
 @NgModule({

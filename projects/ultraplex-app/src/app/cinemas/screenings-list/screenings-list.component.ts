@@ -93,7 +93,7 @@ export class ScreeningsListComponent implements OnInit {
   }
 
   addBooking(element: ScreeningDTO): void {
-    this.screeningsFacadeService.addScreeningDialog(element.id);
+    this.screeningsFacadeService.addBookingDialog(element.id);
   }
 
 }

@@ -16,3 +16,6 @@ export * from './lib/cinemas/@models/screen.model';
 
 export * from './lib/movies/movies.service';
 export * from './lib/movies/@models/movie.model';
+
+export * from './lib/bookings/bookings.service';
+export * from './lib/bookings/@models/bookings.model';

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
-import { CreateScreeningRequest, ScreeningDTO, ScreeningRequest } from '@ultraplex-app/api';
-import { CreateScreening, getScreeningCreateError, getScreeningsError, IScreeningsState, isScreeningCreated, LoadScreenings, selectScreenings, selectScreeningsTotal } from '@ultraplex-app/core';
+import { CreateBookingRequest, ScreeningDTO, ScreeningRequest } from '@ultraplex-app/api';
+import { CreateBooking, getCreateBookingError, getScreeningsError, isBookingCreated, IScreeningsState, LoadScreenings, selectScreenings, selectScreeningsTotal } from '@ultraplex-app/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
@@ -41,7 +41,7 @@ export class ScreeningsFacadeService {
     });
 
     this.store.pipe(
-      select(isScreeningCreated),
+      select(isBookingCreated),
       filter(val => val !== null && val),
       takeUntil(this.destroyed$)
     ).subscribe((done) => {
@@ -52,15 +52,15 @@ export class ScreeningsFacadeService {
           size: this.pageSize$.value
         });
       }
-      this.snackbarService.openSnackBar('Screening was created successfully!!!', 'success');
+      this.snackbarService.openSnackBar('Booking was created successfully!!!', 'success');
     });
 
     this.store.pipe(
-      select(getScreeningCreateError),
+      select(getCreateBookingError),
       filter(val => val !== null),
       takeUntil(this.destroyed$)
     ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Error while creating screening', 'error');
+      this.snackbarService.openSnackBar('Error while creating booking', 'error');
     });
   }
 
@@ -74,11 +74,11 @@ export class ScreeningsFacadeService {
     this.store.dispatch(new LoadScreenings(payload));
   }
 
-  createScreening(payload: CreateScreeningRequest): void {
-    this.store.dispatch(new CreateScreening(payload))
+  createBooking(payload: CreateBookingRequest): void {
+    this.store.dispatch(new CreateBooking(payload))
   }
 
-  addScreeningDialog(screenId: number): void {;
+  addBookingDialog(screeningId: number): void {;
 
     const form: FormDialogData[] = [
       {
@@ -97,7 +97,10 @@ export class ScreeningsFacadeService {
 
     dialogRef.afterClosed().subscribe((result: FormDialogData) => {
       if (result) {
-
+        this.createBooking({
+          screeningId: screeningId,
+          seat: result[0].control.get('seat').value
+        });
       }
     })
   }

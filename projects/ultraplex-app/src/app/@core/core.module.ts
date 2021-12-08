@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
-import { MaterialModule } from '../@shared/material/material.module';
 import { RouterModule } from '@angular/router';
 import { LayoutService } from './services/layout.service';
 import { NavListComponent } from './components/nav-list/nav-list.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 const COMPONENTS: any[] = [
   LayoutComponent,
@@ -20,7 +23,10 @@ const COMPONENTS: any[] = [
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModule
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule
   ],
   exports: [
     ...COMPONENTS

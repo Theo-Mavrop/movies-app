@@ -6,7 +6,7 @@ import { BaseResponse } from '../core/@models/base-response.model';
 import { CinemaDTO } from './@models/cinema.model';
 import { BaseCreateRequest, BaseRequest } from '../core/@models/base-request.model';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
-import { CreateScreeningRequest, CreateScreenRequest, ScreenDTO, ScreeningDTO, ScreeningRequest, ScreenRequest } from '@ultraplex-app/api';
+import { CreateScreeningRequest, CreateScreenRequest, ScreenDTO, ScreeningDTO, ScreeningRequest, ScreenRequest } from './@models/screen.model';
 
 @Injectable()
 export class CinemasApiService {

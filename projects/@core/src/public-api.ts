@@ -36,3 +36,9 @@ export * from './lib/movies/movies.module';
 export * from './lib/movies/store/movies.state';
 export * from './lib/movies/store/movies.selectors';
 export * from './lib/movies/store/movies.actions';
+
+// Bookings
+export * from './lib/bookings/bookings.module';
+export * from './lib/bookings/store/bookings.state';
+export * from './lib/bookings/store/bookings.selectors';
+export * from './lib/bookings/store/bookings.actions';

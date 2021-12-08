@@ -6,6 +6,7 @@ import { ApiHttpService } from './core/services/api-http.service';
 import { DashboardApiModule } from './dashboard/dashboard-api.module';
 import { CinemasApiModule } from './cinemas/cinemas-api.module';
 import { MoviesApiModule } from './movies/movies-api.module';
+import { BookingsApiModule } from './bookings/bookings-api.module';
 
 @NgModule({
   providers: [
@@ -15,7 +16,8 @@ import { MoviesApiModule } from './movies/movies-api.module';
     HttpClientModule,
     DashboardApiModule,
     CinemasApiModule,
-    MoviesApiModule
+    MoviesApiModule,
+    BookingsApiModule
   ]
 })
 export class ApiModule {

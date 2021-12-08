@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CoreModule } from './@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './@shared/material/material.module';
 import { ApplicationModule } from '@ultraplex-app/core';
 import { environment } from '../environments/environment';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { environment } from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
-    MaterialModule,
+    MatSidenavModule,
+    MatToolbarModule,
     AppRoutingModule,
     ApplicationModule.forRoot({
       baseUrl: environment.baseUrl

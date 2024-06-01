@@ -1,4 +1,4 @@
-import { ScreeningDTO } from "@ultraplex-app/api";
+import { ScreeningDTO } from "@movies-app/api";
 import { IBasePagedState, IBaseResultState } from "../../app-store/app.state";
 
 export interface IScreeningsState extends IBasePagedState, IBaseResultState{

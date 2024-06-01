@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BaseResponse, CreateScreenRequest, MovieDTO, ScreenDTO, ScreenRequest } from '@ultraplex-app/api';
+import { BaseResponse, CreateScreenRequest, MovieDTO, ScreenDTO, ScreenRequest } from '@movies-app/api';
 
 export enum EScreensActions {
   LoadScreens = '[Screens] Load Screens',

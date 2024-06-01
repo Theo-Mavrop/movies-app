@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BaseCreateRequest, BaseRequest, BaseResponse, CinemaDTO } from '@ultraplex-app/api';
+import { BaseCreateRequest, BaseRequest, BaseResponse, CinemaDTO } from '@movies-app/api';
 
 export enum ECinemasActions {
   LoadCinemas = '[Cinemas] Load cinemas',

@@ -2,7 +2,7 @@ import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ApiModule } from '@ultraplex-app/api';
+import { ApiModule } from '@movies-app/api';
 import { ROOT_REDUCERS } from './app-store/app.reducers';
 
 @NgModule({

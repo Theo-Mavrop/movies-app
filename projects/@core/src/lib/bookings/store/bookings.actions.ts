@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { CreateBookingRequest } from "@ultraplex-app/api";
+import { CreateBookingRequest } from "@movies-app/api";
 
 export enum EBookingsActions {
   CreateBooking = '[Bookings] Create booking',

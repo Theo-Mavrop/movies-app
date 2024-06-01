@@ -1,0 +1,10 @@
+<mat-toolbar class="header" color="primary">
+  <div class="header__menu">
+    <button class="header__menuBtn" mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon class="header__hamburgerIcon">{{ (isSidenavOpened$ | async) === true ? 'close' : 'menu'}}</mat-icon>
+    </button>
+  </div>
+  <div class="header__brand">
+    <a class="header__link" [routerLink]="['/dashboard']">movies</a>
+  </div>
+</mat-toolbar>

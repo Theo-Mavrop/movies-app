@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BaseResponse, CreateScreeningRequest, ScreeningDTO, ScreeningRequest } from '@ultraplex-app/api';
+import { BaseResponse, CreateScreeningRequest, ScreeningDTO, ScreeningRequest } from '@movies-app/api';
 
 export enum EScreeningsActions {
   LoadScreenings = '[Screenings] Load Screenings',

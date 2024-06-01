@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { BaseRequest, BaseResponse, CreateMovieRequest, MovieDTO } from '@ultraplex-app/api';
+import { BaseRequest, BaseResponse, CreateMovieRequest, MovieDTO } from '@movies-app/api';
 
 export enum EMoviesActions {
   LoadMovies = '[Movies] Load Movies',

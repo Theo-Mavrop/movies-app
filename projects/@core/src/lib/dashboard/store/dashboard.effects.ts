@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DashboardApiService } from '@ultraplex-app/api';
+import { DashboardApiService } from '@movies-app/api';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { EDashboardActions, LoadTotalBookings, LoadTotalCinemas, LoadTotalMovies, TotalBookingsLoaded, TotalCinemasLoaded, TotalMoviesLoaded, TotalScreensLoaded } from './dashboard.actions';
 

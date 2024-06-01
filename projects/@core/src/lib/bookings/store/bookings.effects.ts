@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { BookingsApiService } from '@ultraplex-app/api';
+import { BookingsApiService } from '@movies-app/api';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CreateBooking, CreateBookingFail, CreateBookingSuccess, EBookingsActions } from './bookings.actions';
 

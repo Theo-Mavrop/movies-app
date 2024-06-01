@@ -1,6 +1,6 @@
 import { BaseDTO } from '../../core/@models/base.model';
 import { BaseCreateRequest, BaseRequest } from '../../core/@models/base-request.model';
-import { MovieDTO } from '@ultraplex-app/api';
+import { MovieDTO } from '@movies-app/api';
 
 export interface ScreenDTO extends BaseDTO {}
 

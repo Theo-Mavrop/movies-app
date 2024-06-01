@@ -1,4 +1,4 @@
-import { CinemaDTO } from "@ultraplex-app/api";
+import { CinemaDTO } from "@movies-app/api";
 import { IBasePagedState, IBaseResultState } from "../../app-store/app.state";
 
 export interface ICinemasState extends IBasePagedState, IBaseResultState{

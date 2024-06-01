@@ -4,10 +4,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@ultraplex-app/api": [
+      "@movies-app/api": [
         "projects/@api/src/public-api"
       ],
-      "@ultraplex-app/core": [
+      "@movies-app/core": [
         "projects/@core/src/public-api"
       ]
     },

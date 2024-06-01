@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { BaseResponse, MovieDTO, MoviesApiService } from '@ultraplex-app/api';
+import { BaseResponse, MovieDTO, MoviesApiService } from '@movies-app/api';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CreateMovie, CreateMovieFail, CreateMovieSuccess, EMoviesActions, LoadMovies, MoviesLoaded, MoviesLoadedFailed } from './movies.actions';
 

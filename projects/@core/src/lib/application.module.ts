@@ -1,4 +1,4 @@
-import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -17,7 +17,7 @@ import { ROOT_REDUCERS } from './app-store/app.reducers';
   exports: []
 })
 export class ApplicationModule {
-  static forRoot(config: ApplicationConfig): ModuleWithProviders {
+  static forRoot(config: ApplicationConfig) {
     return {
       ngModule: ApplicationModule,
       providers: [
@@ -31,13 +31,6 @@ export class ApplicationModule {
 }
 
 export const CONFIGURATION = new InjectionToken<boolean>('');
-
-declare module '@angular/core' {
-  interface ModuleWithProviders<T = any> {
-    ngModule: Type<T>;
-    providers?: Provider[];
-  }
-}
 
 export interface ApplicationConfig {
   baseUrl: string;

@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
+import { ErrorHandler, InjectionToken, NgModule } from '@angular/core';
 import { GlobalErrorHandler } from './core/interceptors/global-error-handler';
 import { ApiHelpersService } from './core/services/api-helpers.service';
 import { ApiHttpService } from './core/services/api-http.service';
@@ -21,7 +21,7 @@ import { BookingsApiModule } from './bookings/bookings-api.module';
   ]
 })
 export class ApiModule {
-  static forRoot(config: ApiConfig): ModuleWithProviders {
+  static forRoot(config: ApiConfig) {
     return {
       ngModule: ApiModule,
       providers : [
@@ -30,13 +30,6 @@ export class ApiModule {
         { provide: ErrorHandler, useClass: GlobalErrorHandler }
       ]
     };
-  }
-}
-
-declare module '@angular/core' {
-  interface ModuleWithProviders<T = any> {
-    ngModule: Type<T>;
-    providers?: Provider[];
   }
 }
 

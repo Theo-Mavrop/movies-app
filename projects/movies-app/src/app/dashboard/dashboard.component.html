@@ -5,7 +5,6 @@
       <dashboard-card [title]="'Cinemas'">
         <dashboard-doughnut-chart
           [data]="[(totalCinemas$ | async)]"
-          [colors]="[{backgroundColor: '#F57C00'}]"
           [labels]="['# of cinemas']"
         >
         </dashboard-doughnut-chart>
@@ -15,7 +14,6 @@
       <dashboard-card [title]="'Screens'">
         <dashboard-doughnut-chart
           [data]="[(totalScreens$ | async)]"
-          [colors]="[{backgroundColor: '#3d5afe'}]"
           [labels]="['# of screens']"
         ></dashboard-doughnut-chart>
       </dashboard-card>
@@ -24,7 +22,6 @@
       <dashboard-card [title]="'Movies'">
         <dashboard-doughnut-chart
           [data]="[(totalMovies$ | async)]"
-          [colors]="[{backgroundColor: '#aa00ff'}]"
           [labels]="['# of movies']"
         ></dashboard-doughnut-chart>
       </dashboard-card>
@@ -33,7 +30,6 @@
       <dashboard-card [title]="'Bookings'">
         <dashboard-doughnut-chart
           [data]="[(totalBookings$ | async)]"
-          [colors]="[{backgroundColor: '#f44336'}]"
           [labels]="['# of bookings']"
         ></dashboard-doughnut-chart>
       </dashboard-card>

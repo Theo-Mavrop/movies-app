@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
 import { CinemasFacadeService } from '../cinemas.facade.service';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
 import { Router } from '@angular/router';
@@ -49,7 +49,7 @@ export class CinemasListComponent implements OnInit {
     private cinemasFacadeService: CinemasFacadeService,
     private screensFacadeService: ScreensFacadeService,
     private dialog: MatDialog,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router
   ) {
     this.cinemaData$ = this.cinemasFacadeService.cinemas$;

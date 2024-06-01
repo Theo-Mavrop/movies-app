@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseRequest, MovieDTO } from '@movies-app/api';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -42,7 +42,7 @@ export class MoviesListComponent implements OnInit {
   constructor(
     private moviesFacadeService: MoviesFacadeService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.movieData$ = this.moviesFacadeService.movies$;
     this.movieDisplayColumns = this.movieColumns.map(c => c.columnDef);

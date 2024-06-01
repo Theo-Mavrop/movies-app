@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 
 export interface CreateDialogData {
@@ -10,7 +10,7 @@ export interface FormDialogData {
   label: string;
   controlName: string;
   controlType: string;
-  control: FormGroup;
+  control: UntypedFormGroup;
   options$?: Observable<OptionInfo[]>;
 }
 

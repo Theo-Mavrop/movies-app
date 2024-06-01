@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { CreateScreeningRequest, CreateScreenRequest, ScreenDTO, ScreenRequest } from '@movies-app/api';
@@ -24,7 +24,7 @@ export class ScreensFacadeService {
     private store: Store<IScreensState>,
     private snackbarService: SnackBarService,
     private dialog: MatDialog,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) {
     this.screens$ = this.store.pipe(select(selectScreens));
     this.totalScreens$ = this.store.pipe(select(selectScreensTotal));

@@ -12,8 +12,8 @@ export class ApiHttpService {
   get<T>(url: string, options?: {
     headers?: HttpHeaders,
     params?: HttpParams
-  }): Observable<T> {
-    return this.http.get<T>(url, options);
+  }): Observable<any> {
+    return this.http.get<any>(url, {...options, observe: 'response'});
   }
 
   post<T>(url: string, data: any, options?: any) {

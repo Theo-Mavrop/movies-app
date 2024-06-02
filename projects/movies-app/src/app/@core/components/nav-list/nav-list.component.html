@@ -1,14 +1,6 @@
 <mat-nav-list class="nav-list u-columnFull">
-  <a class="nav-list__item u-flexRow u-flexRow u-flexYCenter" mat-list-item [routerLink]="['/dashboard']" routerLinkActive="nav-list__item--active" (click)="onSidenavClose()">
-    <mat-icon class="nav-list__icon">dashboard</mat-icon>
-    <span class="nav-list__caption">Dashboard</span>
-  </a>
-  <a class="nav-list__item u-flexRow u-flexRow u-flexYCenter" mat-list-item [routerLink]="['/cinemas']" routerLinkActive="nav-list__item--active" (click)="onSidenavClose()">
-    <mat-icon class="nav-list__icon">photo_camera_back</mat-icon>
-    <span class="nav-list__caption">Cinemas</span>
-  </a>
   <a class="nav-list__item u-flexRow u-flexRow u-flexYCenter" mat-list-item [routerLink]="['/movies']" routerLinkActive="nav-list__item--active" (click)="onSidenavClose()">
-    <mat-icon class="nav-list__icon">videocam</mat-icon>
+    <mat-icon matListItemIcon class="nav-list__icon">videocam</mat-icon>
     <span class="nav-list__caption">Movies</span>
   </a>
 </mat-nav-list>

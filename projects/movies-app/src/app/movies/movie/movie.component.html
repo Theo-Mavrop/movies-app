@@ -1,0 +1,60 @@
+<ng-container *ngIf="getMovieSucceed$ | async">
+  <div class="movie u-columnFull">
+    <h1 class="movie__title mat-h1">Movie</h1>
+    <div class="movie__details u-flexRow">
+      <mat-form-field appearance="fill">
+        <mat-label>Id</mat-label>
+        <input
+          matInput
+          [value]="(movie$ | async)?.id"
+          disabled
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          [value]="(movie$ | async)?.name"
+          disabled
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Runtime</mat-label>
+        <input
+          matInput
+          [type]="'number'"
+          [value]="(movie$ | async)?.runtime"
+          disabled
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [value]="(movie$ | async)?.description"
+          rows="5"
+          cols="33"
+          disabled
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Director</mat-label>
+          <input
+            matInput
+            [value]="(movie$ | async)?.director"
+            disabled
+          >
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Actors</mat-label>
+        <textarea
+          matInput
+          [value]="(movie$ | async)?.actors"
+          rows="5"
+          cols="33"
+          disabled
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-container>

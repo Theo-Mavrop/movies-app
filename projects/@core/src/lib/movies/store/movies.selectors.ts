@@ -29,6 +29,30 @@ export const getCreateMovieError = createSelector(
     ? state.error : null;
 });
 
+export const isMovieUpdated = createSelector(
+  selectMoviesState,
+  (state: IMoviesState) =>
+      state.action === EMoviesActions.EditMovie && state.done && !state.error);
+
+export const getEditMovieError = createSelector(
+  selectMoviesState,
+  (state: IMoviesState) => {
+    return state.action === EMoviesActions.EditMovie
+    ? state.error : null;
+});
+
+export const isMovieDeleted = createSelector(
+  selectMoviesState,
+  (state: IMoviesState) =>
+      state.action === EMoviesActions.DeleteMovie && state.done && !state.error);
+
+export const getDeleteMovieError = createSelector(
+  selectMoviesState,
+  (state: IMoviesState) => {
+    return state.action === EMoviesActions.DeleteMovie
+    ? state.error : null;
+});
+
 export const getMoviesError = createSelector(
   selectMoviesState,
   (state: IMoviesState) => {
@@ -36,3 +60,21 @@ export const getMoviesError = createSelector(
       ? state.error
       : null;
 });
+
+export const getMovieError = createSelector(
+  selectMoviesState,
+  (state: IMoviesState) => {
+    return state.action === EMoviesActions.GetMovie
+      ? state.error
+      : null;
+});
+
+export const getMovie = createSelector(
+  selectMoviesState,
+  (_state: IMoviesState) => _state.selectedMovie
+  );
+
+  export const getMovieSucceed = createSelector(
+    selectMoviesState,
+    (state: IMoviesState) =>
+        state.action === EMoviesActions.GetMovie && state.done && !state.error);

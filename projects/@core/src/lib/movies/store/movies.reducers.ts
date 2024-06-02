@@ -17,21 +17,42 @@ export const moviesReducers = (
     case EMoviesActions.MoviesLoaded: {
       return {
         ...state,
-        movies: action.payload.content,
-        totalElements: action.payload.totalElements,
-        totalPages: action.payload.totalPages,
-        size: action.payload.size,
-        number: action.payload.number,
-        numberOfElements: action.payload.numberOfElements,
+        movies: action.payload.data,
+        totalElements: action.payload.items,
+        totalPages: action.payload.pages,
+        numberOfElements: action.payload.data.length,
         done: true,
         error: null
       };
     }
+    case EMoviesActions.DeleteMovieFail:
+    case EMoviesActions.EditMovieFail:
+    case EMoviesActions.CreateMovieFail:
+    case EMoviesActions.SearchMoviesFailed:
     case EMoviesActions.MoviesLoadedFailed: {
       return {
         ...state,
         done: true,
         error: action.payload
+      };
+    }
+    case EMoviesActions.SearchMovies: {
+      return {
+        ...state,
+        action: EMoviesActions.SearchMovies,
+        done: false,
+        error: null
+      }
+    }
+    case EMoviesActions.SearchMoviesLoaded: {
+      return {
+        ...state,
+        movies: action.payload,
+        totalElements: action.payload.length,
+        totalPages: 1,
+        numberOfElements: action.payload.length,
+        done: true,
+        error: null
       };
     }
     case EMoviesActions.CreateMovie: {
@@ -42,6 +63,8 @@ export const moviesReducers = (
         error: null
       }
     }
+    case EMoviesActions.DeleteMovieSuccess:
+    case EMoviesActions.EditMovieSuccess:
     case EMoviesActions.CreateMovieSuccess: {
       return {
         ...state,
@@ -49,9 +72,42 @@ export const moviesReducers = (
         error: null
       }
     }
-    case EMoviesActions.CreateMovieFail: {
+    case EMoviesActions.EditMovie: {
       return {
         ...state,
+        action: EMoviesActions.EditMovie,
+        done: false,
+        error: null
+      }
+    }
+    case EMoviesActions.DeleteMovie: {
+      return {
+        ...state,
+        action: EMoviesActions.DeleteMovie,
+        done: false,
+        error: null
+      }
+    }
+    case EMoviesActions.GetMovie: {
+      return {
+        ...state,
+        action: EMoviesActions.GetMovie,
+        done: false,
+        error: null
+      }
+    }
+    case EMoviesActions.MovieLoaded: {
+      return {
+        ...state,
+        selectedMovie: action.payload,
+        done: true,
+        error: null
+      }
+    }
+    case EMoviesActions.MovieLoadedFailed: {
+      return {
+        ...state,
+        selectedMovie: null,
         done: true,
         error: action.payload
       }

@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
-<div mat-dialog-content>
+<div mat-dialog-content class="form-fields">
   <ng-container *ngFor="let item of data.form">
     <mat-form-field [formGroup]="item.control" appearance="fill">
       <mat-label>{{item.label}}</mat-label>
@@ -9,6 +9,14 @@
             matInput
             [formControlName]="item.controlName"
           >
+        </ng-container>
+        <ng-container *ngSwitchCase="'textarea'">
+          <textarea
+            matInput
+            [formControlName]="item.controlName"
+            rows="5"
+            cols="33"
+          ></textarea>
         </ng-container>
         <ng-container *ngSwitchCase="'number'">
           <input
@@ -34,7 +42,7 @@
           </mat-select>
         </ng-container>
       </ng-container>
-      <mat-error *ngIf="item.control.controls[item.controlName].hasError('required')">{{item.label}} is required</mat-error>
+      <mat-error *ngIf="item.control.controls[item.controlName]?.hasError('required')">{{item.label}} is required</mat-error>
     </mat-form-field>
   </ng-container>
 </div>

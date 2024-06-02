@@ -9,7 +9,7 @@ import { ROOT_REDUCERS } from './app-store/app.reducers';
   declarations: [],
   imports: [
     StoreModule.forRoot(ROOT_REDUCERS),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument({connectInZone: true}),
     EffectsModule.forRoot([]),
     ApiModule
   ],

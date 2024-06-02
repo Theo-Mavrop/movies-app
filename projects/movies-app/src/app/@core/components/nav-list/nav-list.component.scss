@@ -3,12 +3,11 @@
 .nav-list {
 
   &__icon {
-    color: $primary-color;
+    color: $primary-color !important;
   }
 
   &__caption {
     color: $secondary-color;
-    padding-left: 0.6rem;
   }
 
   &__item {

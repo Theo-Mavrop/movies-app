@@ -8,10 +8,14 @@ import { MoviesListComponent } from './movies-list/movies-list.component';
 import { MoviesFacadeService } from './movies.facade.service';
 import { MoviesCoreModule } from '@movies-app/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MovieComponent } from './movie/movie.component';
 
 @NgModule({
   declarations: [
-    MoviesListComponent
+    MoviesListComponent,
+    MovieComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +23,9 @@ import { MatButtonModule } from '@angular/material/button';
     MoviesCoreModule,
     DataTableModule,
     CreateDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [
     MoviesFacadeService,

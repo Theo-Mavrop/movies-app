@@ -3,9 +3,11 @@ import { BaseCreateRequest } from '../../core/@models/base-request.model';
 
 export interface MovieDTO extends BaseDTO {
   runtime?: number;
+  actors: string;
+  description: string;
+  director: string;
 }
 
-export interface CreateMovieRequest extends BaseCreateRequest {
-  runtime?: number;
+export interface CRUDMovieRequest extends BaseCreateRequest, MovieDTO {
 }
 

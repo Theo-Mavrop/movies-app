@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://develop.hybrid.iov99.com/movies/api/v1'
+  baseUrl: '' // left blank for mock json server
 };
 
 /*

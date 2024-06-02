@@ -1,12 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandler, InjectionToken, NgModule } from '@angular/core';
+import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { GlobalErrorHandler } from './core/interceptors/global-error-handler';
 import { ApiHelpersService } from './core/services/api-helpers.service';
 import { ApiHttpService } from './core/services/api-http.service';
-import { DashboardApiModule } from './dashboard/dashboard-api.module';
-import { CinemasApiModule } from './cinemas/cinemas-api.module';
 import { MoviesApiModule } from './movies/movies-api.module';
-import { BookingsApiModule } from './bookings/bookings-api.module';
 
 @NgModule({
   providers: [
@@ -14,10 +12,7 @@ import { BookingsApiModule } from './bookings/bookings-api.module';
   ],
   imports: [
     HttpClientModule,
-    DashboardApiModule,
-    CinemasApiModule,
     MoviesApiModule,
-    BookingsApiModule
   ]
 })
 export class ApiModule {
@@ -27,7 +22,8 @@ export class ApiModule {
       providers : [
         { provide: API_CONFIG, useValue: config },
         { provide: ApiHelpersService },
-        { provide: ErrorHandler, useClass: GlobalErrorHandler }
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
+        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true}
       ]
     };
   }

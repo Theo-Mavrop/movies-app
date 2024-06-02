@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { BaseRequest, MovieDTO } from '@movies-app/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
@@ -31,6 +32,15 @@ export class MoviesListComponent implements OnInit {
       columnDef: 'runtime',
       header: 'Runtime (minutes)',
       cell: (element) => `${element.runtime || ''}`
+    },
+    {
+      columnDef: 'actions',
+      header: 'Actions',
+      actions: [
+        { label: 'View', action: (element: MovieDTO) => this.viewMovieDetails(element)},
+        { label: 'Edit', action: (element: MovieDTO) => this.onAddEditMovie(element)},
+        { label: 'Delete', action: (element: MovieDTO) => this.deleteMovie(element)},
+      ]
     }
   ];
   movieData$: Observable<MovieDTO[]>;
@@ -42,7 +52,8 @@ export class MoviesListComponent implements OnInit {
   constructor(
     private moviesFacadeService: MoviesFacadeService,
     private dialog: MatDialog,
-    private fb: UntypedFormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.movieData$ = this.moviesFacadeService.movies$;
     this.movieDisplayColumns = this.movieColumns.map(c => c.columnDef);
@@ -65,14 +76,20 @@ export class MoviesListComponent implements OnInit {
     });
   }
 
-  onAddMovie(): void {
+  onSearch(text: string) {
+    this.moviesFacadeService.searchMovies({
+      text
+    });
+  }
+
+  onAddEditMovie(movie: MovieDTO): void {
     const form: FormDialogData[] = [
       {
         label: 'Name',
         controlName: 'name',
         controlType: 'text',
         control: this.fb.group(
-          { name: ['', [Validators.required]] }
+          { name: [movie?.name, [Validators.required]] }
         )
       },
       {
@@ -80,23 +97,69 @@ export class MoviesListComponent implements OnInit {
         controlName: 'runtime',
         controlType: 'number',
         control: this.fb.group(
-          { runtime: [null, [Validators.min(0)]]}
+          { runtime: [movie?.runtime, [Validators.min(0)]]}
+        )
+      },
+      {
+        label: 'Description',
+        controlName: 'description',
+        controlType: 'textarea',
+        control: this.fb.group(
+          { description: [movie?.description, []]}
+        )
+      },
+      {
+        label: 'Director',
+        controlName: 'director',
+        controlType: 'text',
+        control: this.fb.group(
+          { director: [movie?.director, []]}
+        )
+      },
+      {
+        label: 'Actors',
+        controlName: 'actors',
+        controlType: 'textarea',
+        control: this.fb.group(
+          { actors: [movie?.actors, []]}
         )
       }
     ];
     const dialogRef = this.dialog.open(CreateDialogComponent, {
-      width: '25rem',
-      data: { title: 'Create movie' , form }
+      // width: '26rem',
+      data: { title: movie ? 'Edit movie' : 'Create movie' , form }
     });
 
     dialogRef.afterClosed().subscribe((result: FormDialogData) => {
       if (result) {
-        this.moviesFacadeService.createMovie({
-          name: result[0].control.get('name').value,
-          runtime: result[1].control.get('runtime').value
-        });
+        if (!movie) {
+          this.moviesFacadeService.createMovie({
+            name: result[0].control.get('name').value,
+            runtime: result[1].control.get('runtime').value,
+            id: null,
+            actors: result[2].control.get('description').value,
+            description: result[3].control.get('director').value,
+            director: result[4].control.get('actors').value
+          });
+        } else {
+          this.moviesFacadeService.editMovie({
+            name: result[0].control.get('name').value,
+            runtime: result[1].control.get('runtime').value,
+            id: movie.id,
+            actors: result[2].control.get('description').value,
+            description: result[3].control.get('director').value,
+            director: result[4].control.get('actors').value
+          });
+        }
       }
     })
   }
 
+  deleteMovie(movie: MovieDTO) {
+    this.moviesFacadeService.deleteMovie(movie)
+  }
+
+  viewMovieDetails(movie: MovieDTO) {
+    this.router.navigate([`movies/${movie.id}`])
+  }
 }

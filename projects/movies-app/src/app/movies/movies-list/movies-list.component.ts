@@ -4,10 +4,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BaseRequest, MovieDTO } from '@movies-app/api';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { FormDialogData } from '../../@shared/common/@models/create-dialog.models';
 import { DataTableColumn } from '../../@shared/common/@models/data-table';
 import { CreateDialogComponent } from '../../@shared/common/components/create-dialog/create-dialog.component';
+import { SnackBarService } from '../../@shared/common/services/snackbar.service';
 import { MoviesFacadeService } from '../movies.facade.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-movies-list',
@@ -48,19 +51,97 @@ export class MoviesListComponent implements OnInit {
   totalMovies$: Observable<number>;
   pageSize$: BehaviorSubject<number>;
   pageIndex$: BehaviorSubject<number>;
-  showPaging$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  showPaging$: BehaviorSubject<boolean>;
+  movieError$: Observable<Error>;
+  moviesError$: Observable<Error>;
+  createMovieError$: Observable<Error>;
+  updateMovieError$: Observable<Error>;
+  deleteMovieError$: Observable<Error>;
+  movieCreated$: Observable<boolean>;
+  movieUpdated$: Observable<boolean>;
+  movieDeleted$: Observable<boolean>;
+  searchText: string;
 
   constructor(
     private moviesFacadeService: MoviesFacadeService,
     private dialog: MatDialog,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackBarService
   ) {
     this.movieData$ = this.moviesFacadeService.movies$;
     this.movieDisplayColumns = this.movieColumns.map(c => c.columnDef);
     this.totalMovies$ = this.moviesFacadeService.totalMovies$;
     this.pageSize$ = this.moviesFacadeService.pageSize$;
     this.pageIndex$ = this.moviesFacadeService.page$;
+    this.showPaging$ = this.moviesFacadeService.showPaging$;
+    this.movieError$ = this.moviesFacadeService.movieError$;
+    this.moviesError$ = this.moviesFacadeService.moviesError$;
+    this.createMovieError$ = this.moviesFacadeService.createMovieError$;
+    this.updateMovieError$ = this.moviesFacadeService.updateMovieError$;
+    this.deleteMovieError$ = this.moviesFacadeService.deleteMovieError$;
+    this.movieCreated$ = this.moviesFacadeService.movieCreated$;
+    this.movieUpdated$ = this.moviesFacadeService.movieUpdated$;
+    this.movieDeleted$ = this.moviesFacadeService.movieDeleted$;
+
+    this.movieError$.pipe(
+      filter(val => val !== null),
+      takeUntilDestroyed()
+    ).subscribe((error) => {
+      this.snackbarService.openSnackBar('Failed to load movie', 'error')
+    });
+
+    this.moviesError$.pipe(
+      filter(val => val !== null),
+      takeUntilDestroyed()
+    ).subscribe((error) => {
+      this.snackbarService.openSnackBar('Failed to load movies', 'error')
+    });
+
+    this.createMovieError$.pipe(
+      filter(val => val !== null),
+      takeUntilDestroyed()
+    ).subscribe((error) => {
+      this.snackbarService.openSnackBar('Error while creating movie', 'error');
+    });
+
+    this.updateMovieError$.pipe(
+      filter(val => val !== null),
+      takeUntilDestroyed()
+    ).subscribe((error) => {
+      this.snackbarService.openSnackBar('Error while updating movie', 'error');
+    });
+
+    this.deleteMovieError$.pipe(
+      filter(val => val !== null),
+      takeUntilDestroyed()
+    ).subscribe((error) => {
+      this.snackbarService.openSnackBar('Error while deleting movie', 'error');
+    });
+
+    this.movieCreated$.pipe(
+      filter(val => val !== null && val),
+      takeUntilDestroyed()
+    ).subscribe((done) => {
+      this.refreshResults();
+      this.snackbarService.openSnackBar('Movie was created successfully!!!', 'success');
+    });
+
+    this.movieUpdated$.pipe(
+      filter(val => val !== null && val),
+      takeUntilDestroyed()
+    ).subscribe((done) => {
+      this.refreshResults();
+      this.snackbarService.openSnackBar('Movie was updated successfully!!!', 'success');
+    });
+
+    this.movieDeleted$.pipe(
+      filter(val => val !== null && val),
+      takeUntilDestroyed()
+    ).subscribe((done) => {
+      this.refreshResults();
+      this.snackbarService.openSnackBar('Movie was deleted successfully!!!', 'success');
+    });
    }
 
   ngOnInit(): void {
@@ -71,7 +152,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   onPageChange(event: BaseRequest) {
-    this.showPaging$.next(true);
+    this.moviesFacadeService.showPaging$.next(true);
     this.moviesFacadeService.loadMovies({
       size: event.size,
       page: event.page
@@ -79,13 +160,14 @@ export class MoviesListComponent implements OnInit {
   }
 
   onSearch(text: string) {
+    this.searchText = text;
     if (text) {
-      this.showPaging$.next(false);
+      this.moviesFacadeService.showPaging$.next(false);
       this.moviesFacadeService.searchMovies({
         text
       });
     } else {
-      this.showPaging$.next(true);
+      this.moviesFacadeService.showPaging$.next(true);
       this.onPageChange({
         size: this.pageSize$.value,
         page: this.pageIndex$.value
@@ -172,5 +254,9 @@ export class MoviesListComponent implements OnInit {
 
   viewMovieDetails(movie: MovieDTO) {
     this.router.navigate([`movies/${movie.id}`])
+  }
+
+  refreshResults() {
+    this.onSearch(this.searchText)
   }
 }

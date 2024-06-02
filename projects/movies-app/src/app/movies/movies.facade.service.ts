@@ -3,8 +3,6 @@ import { select, Store } from '@ngrx/store';
 import { BaseRequest, CRUDMovieRequest, MovieDTO, SearchRequest } from '@movies-app/api';
 import { CreateMovie, DeleteMovie, EditMovie, getCreateMovieError, getDeleteMovieError, getEditMovieError, getMovie, GetMovie, getMovieError, getMoviesError, IMoviesState, isMovieCreated, isMovieDeleted, isMovieUpdated, LoadMovies, SearchMovies, selectMovies, selectMoviesTotal, getMovieSucceed } from '@movies-app/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { SnackBarService } from '../@shared/common/services/snackbar.service';
 
 @Injectable()
 export class MoviesFacadeService {
@@ -15,10 +13,18 @@ export class MoviesFacadeService {
   pageSize$: BehaviorSubject<number>;
   page$: BehaviorSubject<number>;
   getMovieSucceed$: Observable<boolean>;
+  showPaging$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  movieError$: Observable<Error>;
+  moviesError$: Observable<Error>;
+  createMovieError$: Observable<Error>;
+  updateMovieError$: Observable<Error>;
+  deleteMovieError$: Observable<Error>;
+  movieCreated$: Observable<boolean>;
+  movieUpdated$: Observable<boolean>;
+  movieDeleted$: Observable<boolean>;
 
   constructor(
-    private store: Store<IMoviesState>,
-    private snackbarService: SnackBarService
+    private store: Store<IMoviesState>
   ) {
     this.movies$ = this.store.pipe(select(selectMovies));
     this.movie$ = this.store.pipe(select(getMovie));
@@ -26,71 +32,14 @@ export class MoviesFacadeService {
     this.getMovieSucceed$ = this.store.pipe(select(getMovieSucceed));
     this.pageSize$ = new BehaviorSubject(10);
     this.page$ = new BehaviorSubject(0);
-
-    this.store.pipe(
-      select(getMoviesError),
-      filter(val => val !== null)
-    ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Failed to load movies', 'error')
-    });
-
-    this.store.pipe(
-      select(getMovieError),
-      filter(val => val !== null)
-    ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Failed to load movie', 'error')
-    });
-
-    this.store.pipe(
-      select(isMovieCreated),
-      filter(val => val !== null && val)
-    ).subscribe((done) => {
-      this.loadMovies({
-        page: this.page$.value,
-        size: this.pageSize$.value
-      });
-      this.snackbarService.openSnackBar('Movie was created successfully!!!', 'success');
-    });
-    this.store.pipe(
-      select(getCreateMovieError),
-      filter(val => val !== null)
-    ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Error while creating movie', 'error');
-    });
-
-    this.store.pipe(
-      select(isMovieUpdated),
-      filter(val => val !== null && val)
-    ).subscribe((done) => {
-      this.loadMovies({
-        page: this.page$.value,
-        size: this.pageSize$.value
-      });
-      this.snackbarService.openSnackBar('Movie was updated successfully!!!', 'success');
-    });
-    this.store.pipe(
-      select(getEditMovieError),
-      filter(val => val !== null)
-    ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Error while edditing movie', 'error');
-    });
-
-    this.store.pipe(
-      select(isMovieDeleted),
-      filter(val => val !== null && val)
-    ).subscribe((done) => {
-      this.loadMovies({
-        page: this.page$.value,
-        size: this.pageSize$.value
-      });
-      this.snackbarService.openSnackBar('Movie was deleted successfully!!!', 'success');
-    });
-    this.store.pipe(
-      select(getDeleteMovieError),
-      filter(val => val !== null)
-    ).subscribe((error) => {
-      this.snackbarService.openSnackBar('Error while deleting movie', 'error');
-    });
+    this.movieError$ = this.store.pipe(select(getMovieError));
+    this.moviesError$ = this.store.pipe(select(getMoviesError));
+    this.createMovieError$ = this.store.pipe(select(getCreateMovieError));
+    this.updateMovieError$ = this.store.pipe(select(getEditMovieError));
+    this.deleteMovieError$ = this.store.pipe(select(getDeleteMovieError));
+    this.movieCreated$ = this.store.pipe(select(isMovieCreated));
+    this.movieUpdated$ = this.store.pipe(select(isMovieUpdated));
+    this.movieDeleted$ = this.store.pipe(select(isMovieDeleted));
   }
 
   loadMovies(payload: BaseRequest) {

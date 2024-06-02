@@ -21,6 +21,6 @@
     </mat-table>
   </div>
 </div>
-<mat-paginator [length]="total" [pageSize]="pageSize" [pageSizeOptions]="[10]" [pageIndex]="pageIndex" (page)="onPageChanged($event)">
-
-</mat-paginator>
+<ng-container *ngIf="showPaging">
+  <mat-paginator [length]="total" [pageSize]="pageSize" [pageSizeOptions]="[10]" [pageIndex]="pageIndex" (page)="onPageChanged($event)"></mat-paginator>
+</ng-container>

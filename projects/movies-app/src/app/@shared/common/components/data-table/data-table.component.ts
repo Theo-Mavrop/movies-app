@@ -25,6 +25,7 @@ export class DataTableComponent implements OnInit {
   @Input() total: number = 0;
   @Input() pageSize: number = 0;
   @Input() pageIndex: number = 0;
+  @Input() showPaging: boolean = true;
   actionsColumn: DataTableColumn;
 
   expandedElement: null;

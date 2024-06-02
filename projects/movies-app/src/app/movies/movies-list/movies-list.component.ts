@@ -48,6 +48,7 @@ export class MoviesListComponent implements OnInit {
   totalMovies$: Observable<number>;
   pageSize$: BehaviorSubject<number>;
   pageIndex$: BehaviorSubject<number>;
+  showPaging$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   constructor(
     private moviesFacadeService: MoviesFacadeService,
@@ -70,6 +71,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   onPageChange(event: BaseRequest) {
+    this.showPaging$.next(true);
     this.moviesFacadeService.loadMovies({
       size: event.size,
       page: event.page
@@ -77,9 +79,18 @@ export class MoviesListComponent implements OnInit {
   }
 
   onSearch(text: string) {
-    this.moviesFacadeService.searchMovies({
-      text
-    });
+    if (text) {
+      this.showPaging$.next(false);
+      this.moviesFacadeService.searchMovies({
+        text
+      });
+    } else {
+      this.showPaging$.next(true);
+      this.onPageChange({
+        size: this.pageSize$.value,
+        page: this.pageIndex$.value
+      });
+    }
   }
 
   onAddEditMovie(movie: MovieDTO): void {

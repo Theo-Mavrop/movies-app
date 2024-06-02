@@ -15,6 +15,7 @@
       [total]="(totalMovies$ | async)"
       [pageSize]="(pageSize$ | async)"
       [pageIndex]="(pageIndex$ | async)"
+      [showPaging]="(showPaging$ | async)"
       (pageChanged)="onPageChange($event)"
     ></cm-data-table>
   </div>
